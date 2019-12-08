@@ -25,5 +25,9 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <finalName>clinic</finalName>
+    </build>
+
 
 </project>
