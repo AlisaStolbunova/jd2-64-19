@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet ("/doctorCreate")
-public class DoctorCreate extends HttpServlet {
+public class DoctorCreateServlet extends HttpServlet {
 
     private DoctorService doctorService = DoctorServiceImpl.getService();
 
