@@ -17,7 +17,7 @@
       <br>
       <label> Office: <input type="number" name="office"/> </label>
       <br>
-      <label> PhoneNumber: <input type="number" name="phoneNumber"/> </label>
+      <label> PhoneNumber: <input type="text" name="phoneNumber"/> </label>
       <br>
      <input type="submit">
  </form>

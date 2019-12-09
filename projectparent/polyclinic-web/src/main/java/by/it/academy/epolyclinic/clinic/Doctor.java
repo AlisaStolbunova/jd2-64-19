@@ -9,13 +9,13 @@ public class Doctor {
     private String department;
     private Integer section;
     private Integer office;
-    private Long phoneNumber;
+    private String phoneNumber;
 
     public Doctor() {
     }
 
     public Doctor(Long id, String name, String post, String department,
-                  Integer section, Integer office, Long phoneNumber) {
+                  Integer section, Integer office, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.post = post;
@@ -73,11 +73,11 @@ public class Doctor {
         this.office = office;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

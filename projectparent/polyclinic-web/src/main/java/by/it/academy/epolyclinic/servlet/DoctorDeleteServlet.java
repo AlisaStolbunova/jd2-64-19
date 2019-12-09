@@ -23,13 +23,13 @@ public class DoctorDeleteServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/doctorsList");
     }
 
-//    @Override
-//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
-//            throws ServletException, IOException {
-//
-//        doctorService.deleteDoctor(Long.parseLong(req.getParameter("id")));
-//
-//        resp.sendRedirect(req.getContextPath() + "/doctorsList");
-//    }
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        doctorService.deleteDoctor(Long.parseLong(req.getParameter("id")));
+
+        resp.sendRedirect(req.getContextPath() + "/doctorsList");
+    }
 
 }

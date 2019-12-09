@@ -14,9 +14,9 @@ public class DoctorServiceImpl implements DoctorService {
     private DoctorServiceImpl() {
         doctors = new ArrayList<>();
         doctors.add(new Doctor(1L, "Podaka Anna", "Physicians", "Therapeutic",
-                1, 330, 123456789L));
+                1, 330, "+375 29 2424561"));
         doctors.add(new Doctor(2L, "Kush Elena", "Physicians", "Therapeutic",
-                2, 333, 123456799L));
+                2, 333, "+375 44 3325671"));
     }
 
     public static DoctorService getService() {

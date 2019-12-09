@@ -33,7 +33,7 @@ public class DoctorCreateServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
 
         Doctor doctor = new Doctor(null, name, post, department, Integer.valueOf(section),
-                Integer.valueOf(office), Long.valueOf(phoneNumber));
+                Integer.valueOf(office), phoneNumber);
 
         doctorService.addNewDoctor(doctor);
 

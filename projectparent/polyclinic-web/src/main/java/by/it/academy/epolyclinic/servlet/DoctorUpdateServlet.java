@@ -27,7 +27,7 @@ public class DoctorUpdateServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
 
         Doctor doctor = new Doctor(Long.parseLong(id), name, post, department, Integer.parseInt(section),
-                Integer.parseInt(office), Long.parseLong(phoneNumber));
+                Integer.parseInt(office), phoneNumber);
 
         doctorService.updateDoctor(doctor);
         resp.sendRedirect(req.getContextPath() + "/doctorsList");
@@ -35,14 +35,14 @@ public class DoctorUpdateServlet extends HttpServlet {
 
     }
 
-//    @Override
-//    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        String id = req.getParameter("id");
-//
-//        for (Doctor doctor : doctorService.getAllDoctors()) {
-//            if (doctor.getId().equals(Long.parseLong("id")))
-//                doctorService.updateDoctor(doctor);
-//        }
-//    }
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String id = req.getParameter("id");
+
+        for (Doctor doctor : doctorService.getAllDoctors()) {
+            if (doctor.getId().equals(Long.parseLong("id")))
+                doctorService.updateDoctor(doctor);
+        }
+    }
 }
