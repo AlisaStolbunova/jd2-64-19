@@ -34,15 +34,4 @@ public class DoctorUpdateServlet extends HttpServlet {
 
 
     }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String id = req.getParameter("id");
-
-        for (Doctor doctor : doctorService.getAllDoctors()) {
-            if (doctor.getId().equals(Long.parseLong("id")))
-                doctorService.updateDoctor(doctor);
-        }
-    }
 }
