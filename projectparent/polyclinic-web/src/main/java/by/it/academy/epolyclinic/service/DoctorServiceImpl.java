@@ -13,9 +13,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     private DoctorServiceImpl() {
         doctors = new ArrayList<>();
-        doctors.add(new Doctor(1L, "Doctor_1", "Physicians", "Therapeutic",
+        doctors.add(new Doctor(1L, "Podaka Anna", "Physicians", "Therapeutic",
                 1, 330, 123456789L));
-        doctors.add(new Doctor(2L, "Doctor_2", "Physicians", "Therapeutic",
+        doctors.add(new Doctor(2L, "Kush Elena", "Physicians", "Therapeutic",
                 2, 333, 123456799L));
     }
 
@@ -32,5 +32,31 @@ public class DoctorServiceImpl implements DoctorService {
     public void addNewDoctor(Doctor doctor) {
         doctor.setId((long) doctors.size() + 1);
         doctors.add(doctor);
+    }
+
+
+    @Override
+    public void deleteDoctor(Long id) {
+        for (Doctor doctor : doctors) {
+            if (doctor.getId().equals(id)) {
+                doctors.remove(doctor);
+            }
+        }
+    }
+
+    @Override
+    public void updateDoctor(Doctor doctor) {
+        for (Doctor doc : doctors) {
+            if (doc.getId().equals(doctor.getId())) {
+                doc.setName(doctor.getName());
+                doc.setPost(doctor.getPost());
+                doc.setDepartment(doctor.getDepartment());
+                doc.setSection(doctor.getSection());
+                doc.setOffice(doctor.getOffice());
+                doc.setPhoneNumber(doctor.getPhoneNumber());
+            }
+        }
+
+
     }
 }
