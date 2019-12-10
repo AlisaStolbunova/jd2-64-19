@@ -4,12 +4,14 @@ import by.it.academy.epolyclinic.clinic.Doctor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class DoctorServiceImpl implements DoctorService {
 
     private static final DoctorService INSTANCE = new DoctorServiceImpl();
 
     private final List<Doctor> doctors;
+    private AtomicLong id = new AtomicLong();
 
     private DoctorServiceImpl() {
         doctors = new ArrayList<>();
@@ -26,22 +28,18 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<Doctor> getAllDoctors() {
         return doctors;
-    }
+    }//clon
 
     @Override
     public void addNewDoctor(Doctor doctor) {
-        doctor.setId((long) doctors.size() + 1);
+        doctor.setId(id.incrementAndGet());
         doctors.add(doctor);
     }
 
 
     @Override
     public void deleteDoctor(Long id) {
-        for (Doctor doctor : doctors) {
-            if (doctor.getId().equals(id)) {
-                doctors.remove(doctor);
-            }
-        }
+        doctors.removeIf(doctor -> id.equals(doctor.getId()));
     }
 
     @Override
@@ -54,6 +52,7 @@ public class DoctorServiceImpl implements DoctorService {
                 doc.setSection(doctor.getSection());
                 doc.setOffice(doctor.getOffice());
                 doc.setPhoneNumber(doctor.getPhoneNumber());
+                break;
             }
         }
 
