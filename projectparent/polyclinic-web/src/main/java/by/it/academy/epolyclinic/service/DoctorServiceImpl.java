@@ -32,7 +32,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void addNewDoctor(Doctor doctor) {
-        doctor.setId(id.incrementAndGet());
+        doctor.setId(id.incrementAndGet() + doctors.size());
         doctors.add(doctor);
     }
 
