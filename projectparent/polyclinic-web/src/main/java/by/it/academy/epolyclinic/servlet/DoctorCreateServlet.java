@@ -1,9 +1,9 @@
 package by.it.academy.epolyclinic.servlet;
 
-import by.it.academy.epolyclinic.clinic.Doctor;
-import by.it.academy.epolyclinic.service.DoctorService;
-import by.it.academy.epolyclinic.service.DoctorServiceImpl;
-
+import by.it.academy.clinic.Doctor;
+import by.it.academy.clinic.User;
+import by.it.academy.service.DoctorService;
+import by.it.academy.service.DoctorServiceImpl;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +19,12 @@ public class DoctorCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/doctorCreate.jsp").forward(req,resp);
+        User user = (User) req.getSession().getAttribute("user");
+        if ("admin".equals(user.getRole())){
+            req.getRequestDispatcher("/WEB-INF/doctorCreate.jsp").forward(req,resp);
+        } else {
+            req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req,resp);
+        }
     }
 
     @Override

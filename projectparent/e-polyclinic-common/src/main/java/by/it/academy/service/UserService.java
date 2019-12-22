@@ -1,6 +1,7 @@
-package by.it.academy.epolyclinic.service;
+package by.it.academy.service;
 
-import by.it.academy.epolyclinic.clinic.User;
+
+import by.it.academy.clinic.User;
 
 import java.util.Optional;
 

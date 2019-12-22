@@ -1,4 +1,4 @@
-package by.it.academy.epolyclinic.clinic;
+package by.it.academy.clinic;
 
 import java.util.Objects;
 

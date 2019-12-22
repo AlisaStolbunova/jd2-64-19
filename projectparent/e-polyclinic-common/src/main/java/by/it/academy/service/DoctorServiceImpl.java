@@ -1,6 +1,6 @@
-package by.it.academy.epolyclinic.service;
+package by.it.academy.service;
 
-import by.it.academy.epolyclinic.clinic.Doctor;
+import by.it.academy.clinic.Doctor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     private DoctorServiceImpl() {
         doctors = new ArrayList<>();
-        doctors.add(new Doctor(1L, "Podaka Anna", "Physicians", "Therapeutic",
+        doctors.add(new Doctor(id.incrementAndGet(), "Podaka Anna", "Physicians", "Therapeutic",
                 1, 330, "+375 29 2424561"));
-        doctors.add(new Doctor(2L, "Kush Elena", "Physicians", "Therapeutic",
+        doctors.add(new Doctor(id.incrementAndGet(), "Kush Elena", "Physicians", "Therapeutic",
                 2, 333, "+375 44 3325671"));
     }
 
@@ -27,12 +27,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<Doctor> getAllDoctors() {
-        return doctors;
-    }//clon
+        return new ArrayList<>(doctors);
+    }
 
     @Override
     public void addNewDoctor(Doctor doctor) {
-        doctor.setId(id.incrementAndGet() + doctors.size());
+        doctor.setId(id.incrementAndGet());
         doctors.add(doctor);
     }
 
