@@ -40,9 +40,11 @@
      </c:forEach>
  </table>
 
- <a:auth path="/doctorCreate">
-      <a href="${pageContext.request.contextPath}/doctorCreate"><fmt:message key="doctors.page.create"/></a>
+ <a:auth path="">
+      <a href="${pageContext.request.contextPath}/doctorCreate">
+      <fmt:message key="doctors.page.create"/></a>
  </a:auth>
+
 
   <jsp:include page="include/footer.jsp"/>
  </body>
