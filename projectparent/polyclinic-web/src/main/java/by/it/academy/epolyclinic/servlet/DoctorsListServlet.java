@@ -1,8 +1,9 @@
 package by.it.academy.epolyclinic.servlet;
 
-import by.it.academy.epolyclinic.clinic.Doctor;
-import by.it.academy.epolyclinic.service.DoctorService;
-import by.it.academy.epolyclinic.service.DoctorServiceImpl;
+import by.it.academy.clinic.Doctor;
+import by.it.academy.clinic.User;
+import by.it.academy.service.DoctorService;
+import by.it.academy.service.DoctorServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +23,8 @@ public class DoctorsListServlet extends HttpServlet {
         List<Doctor> allDoctors = doctorService.getAllDoctors();
 
         req.setAttribute("doctorsList", allDoctors);
-
+        User user = (User) req.getSession().getAttribute("user");
+        req.setAttribute("role", user.getRole());
         req.getRequestDispatcher("/WEB-INF/doctors.jsp").forward(req,resp);
     }
 }

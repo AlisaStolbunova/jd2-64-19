@@ -1,7 +1,7 @@
 package by.it.academy.epolyclinic.servlet;
 
-import by.it.academy.epolyclinic.service.DoctorService;
-import by.it.academy.epolyclinic.service.DoctorServiceImpl;
+import by.it.academy.service.DoctorService;
+import by.it.academy.service.DoctorServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
