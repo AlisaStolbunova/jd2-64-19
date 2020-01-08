@@ -14,8 +14,8 @@ public class UserServiceImpl implements UserService {
 
 
     private UserServiceImpl() {
-        users.put("user1", new User("user1", "admin123", "admin"));
-        users.put("user2", new User("user2", "12345", "user"));
+        users.put("user1", new User(1l,"user1", "admin123", "admin"));
+        users.put("user2", new User(2l,"user2", "12345", "user"));
     }
 
     public static UserService getInstance() {

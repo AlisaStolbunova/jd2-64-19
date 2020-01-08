@@ -35,8 +35,7 @@ public class LoginServlet extends HttpServlet {
 
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
-        String rememberMeStr = req.getParameter("rememberMe");
-        boolean remember = "Y".equals(rememberMeStr);
+        boolean remember = "Y".equals(req.getParameter("rememberMe"));
 
 
         String errorMsg = "";
@@ -58,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 
         if (hasError) {
             req.setAttribute("errorString", errorMsg);
-            req.setAttribute("user", new User(userName, password));
+            req.setAttribute("userName", userName);
             req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/home");
