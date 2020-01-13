@@ -6,7 +6,7 @@ public class Doctor {
     private Long id;
     private String name;
     private String post;
-    private String department;
+    private Integer department;
     private Integer section;
     private Integer office;
     private String phoneNumber;
@@ -14,12 +14,22 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(Long id, String name, String post, String department,
+    public Doctor(Long id, String name, String post, Integer departmentId,
                   Integer section, Integer office, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.post = post;
-        this.department = department;
+        this.department = departmentId;
+        this.section = section;
+        this.office = office;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Doctor(String name, String post, Integer departmentId,
+                  Integer section, Integer office, String phoneNumber) {
+        this.name = name;
+        this.post = post;
+        this.department = departmentId;
         this.section = section;
         this.office = office;
         this.phoneNumber = phoneNumber;
@@ -49,12 +59,12 @@ public class Doctor {
         this.post = post;
     }
 
-    public String getDepartment() {
+    public Integer getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartment(Integer departmentId) {
+        this.department = departmentId;
     }
 
     public Integer getSection() {

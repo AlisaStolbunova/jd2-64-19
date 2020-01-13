@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
 
-    public static final String SELECT_BY_USER_NAME = "SELECT  * FROM user u JOIN user_role r ON u.role_id = r.id WHERE u.user_name = ?";
+    private static final String SELECT_BY_USER_NAME = "SELECT  * FROM user u JOIN user_role r ON u.role_id = r.id WHERE u.userName = ?";
+    private static final String SELECT_ALL_USERS = "SELECT  * FROM user";
+
+    private static final String INSERT_USER = "Insert user(userName, password, salt, role_id) values (?,?,?,?)";
 
     private UserDaoImpl() {
         super(LoggerFactory.getLogger(UserDaoImpl.class));
@@ -26,7 +30,13 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     @Override
     public Long create(User user) throws SQLException {
-        return null;
+        PreparedStatement statement = getConnection().prepareStatement(INSERT_USER);
+        statement.setString(1, user.getUserName());
+        statement.setString(2, user.getPassword());
+        statement.setString(3, user.getSalt());
+        statement.setInt(4, user.getRole());
+        return (long) statement.executeUpdate();
+
     }
 
     @Override
@@ -45,10 +55,25 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public
-
-    List<User> getAll() throws SQLException {
-        return null;
+    public List<User> getAll() throws SQLException {
+        List<User> users = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_USERS);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                User user = new User(rs.getLong("id"),
+                        rs.getString("userName"),
+                        rs.getString("password"),
+                        rs.getString("salt"),
+                        rs.getInt("role_id")
+                );
+                users.add(user);
+            }
+        } finally {
+            closeQuietly(rs);
+        }
+        return users;
     }
 
     @Override
@@ -62,10 +87,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
             if (rs.next()) {
                 User user = new User(rs.getLong("id"),
-                        rs.getString("user_name"),
+                        rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("salt"),
-                        rs.getString("role_name")
+                        rs.getInt("role_id")
                 );
                 return Optional.of(user);
             }

@@ -8,12 +8,16 @@ public class User {
     private String userName;
     private String password;
     private String salt;
-    private String role;
+    private Integer role;
 
     public User() {
     }
 
-    public User(Long id, String userName, String password, String salt, String role) {
+    public User(String userName, String password, String salt, Integer role) {
+        this(null , userName, password, salt, role);
+    }
+
+    public User(Long id, String userName, String password, String salt, Integer role) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -21,7 +25,7 @@ public class User {
         this.role = role;
     }
 
-    public User(Long id, String userName, String password, String role) {
+    public User(Long id, String userName, String password, Integer role) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -67,11 +71,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 
