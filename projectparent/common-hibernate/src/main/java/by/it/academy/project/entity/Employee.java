@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -37,5 +39,10 @@ public class Employee{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "EMPLOYEE_MEETING", joinColumns = {@JoinColumn(name = "EMPLOYEE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "MEETING_ID")})
+    private List<Meeting> meetings = new ArrayList<>();
 
 }
