@@ -12,7 +12,7 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">create</property>
         <mapping class="by.it.academy.project.entity.Person"></mapping>
-<!--        <mapping class="by.it.academy.project.entity.Department"></mapping>-->
+        <mapping class="by.it.academy.project.entity.Department"></mapping>
         <mapping class="by.it.academy.project.entity.Employee"></mapping>
         <mapping class="by.it.academy.project.entity.EmployeeDetail"></mapping>
     </session-factory>

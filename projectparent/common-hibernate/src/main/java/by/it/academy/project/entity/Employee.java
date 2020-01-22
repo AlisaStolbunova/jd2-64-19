@@ -34,4 +34,8 @@ public class Employee{
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
     private EmployeeDetail employeeDetail;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DEPARTMENT_ID")
+    private Department department;
+
 }
