@@ -1,15 +1,9 @@
 package by.it.academy.project.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,19 +24,14 @@ public class Employee{
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "LOCAL_DATETIME")
-    private LocalDateTime date;
+    @Column(name = "Age")
+    private Integer age;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
-    private EmployeeDetail employeeDetail;
+    @Column(name = "Salary")
+    private Long salary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DEPARTMENT_ID")
-    private Department department;
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "EMPLOYEE_MEETING", joinColumns = {@JoinColumn(name = "EMPLOYEE_ID")},
-//            inverseJoinColumns = {@JoinColumn(name = "MEETING_ID")})
-//    private List<Meeting> meetings = new ArrayList<>();
+    @ToString.Exclude private Department department;
 
 }
