@@ -1,14 +1,12 @@
 package by.it.academy.project.DAO;
 
+import by.it.academy.project.entity.Department;
 import by.it.academy.project.entity.Employee;
 import by.it.academy.project.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
@@ -22,6 +20,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     CriteriaBuilder cb = sessionFactory.getCriteriaBuilder();
 
+
     @Override
     public List<Employee> getAll() {
         CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
@@ -29,6 +28,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         criteria.select(employeeRoot);
         Session session = sessionFactory.openSession();
         List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
         return employees;
     }
 
@@ -45,7 +45,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getAllWithNameNotNull() {
-        return null;
+        CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+        Root<Employee> emp = criteria.from(Employee.class);
+        criteria.select(emp).where(cb.isNotNull(emp.get("firstName")));
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
+        return employees;
     }
 
     @Override
@@ -53,7 +59,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
         Root<Employee> emp = criteria.from(Employee.class);
         criteria.select(emp).where(cb.gt(emp.get("salary"), salary));
-        List<Employee> employees = sessionFactory.openSession().createQuery(criteria).getResultList();
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
         return employees;
     }
 
@@ -62,7 +70,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
         Root<Employee> emp = criteria.from(Employee.class);
         criteria.orderBy(cb.desc(emp.get("salary"))).where(cb.gt(emp.get("salary"), salary));
-        List<Employee> employees = sessionFactory.openSession().createQuery(criteria).getResultList();
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
         return employees;
     }
 
@@ -82,7 +92,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
         Root<Employee> emp = criteria.from(Employee.class);
         criteria.select(emp).where(cb.between(emp.get("age"), from, to));
-        List<Employee> employees = sessionFactory.openSession().createQuery(criteria).getResultList();
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
         return employees;
     }
 
@@ -92,9 +104,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Root<Employee> emp = criteria.from(Employee.class);
         Predicate predicate = cb.and
                 (cb.equal(emp.get("firstName"), name),
-                cb.equal(emp.get("age"), age));
+                        cb.equal(emp.get("age"), age));
         criteria.select(emp).where(predicate);
-        List<Employee> employees = sessionFactory.openSession().createQuery(criteria).getResultList();
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
         return employees;
     }
 
@@ -106,7 +120,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 (cb.equal(emp.get("firstName"), name),
                         cb.equal(emp.get("age"), age));
         criteria.select(emp).where(predicate);
-        List<Employee> employees = sessionFactory.openSession().createQuery(criteria).getResultList();
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery(criteria).getResultList();
+        session.close();
         return employees;
     }
 
@@ -114,28 +130,51 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public long getEmployeeCount() {
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
         criteria.select(cb.count(criteria.from(Employee.class)));
-        Long count = sessionFactory.openSession().createQuery(criteria).getSingleResult();
+        Session session = sessionFactory.openSession();
+        Long count = session.createQuery(criteria).getSingleResult();
+        session.close();
         return count;
     }
 
     @Override
     public Double getAverageSalary() {
-        return null;
+        CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+        criteria.select(cb.avg(criteria.from(Employee.class).get("salary")));
+        Session session = sessionFactory.openSession();
+        Double avg = session.createQuery(criteria).getSingleResult();
+        session.close();
+        return avg;
     }
 
     @Override
     public Double getMaxSalary() {
-        return null;
+        CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+        criteria.select(cb.max(criteria.from(Employee.class).get("salary")));
+        Session session = sessionFactory.openSession();
+        Double maxSalary = session.createQuery(criteria).getSingleResult();
+        session.close();
+        return maxSalary;
     }
 
     @Override
     public long getMinAge() {
-        return 0;
+        CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+        criteria.select(cb.min(criteria.from(Employee.class).get("age")));
+        Session session = sessionFactory.openSession();
+        Long minAge = session.createQuery(criteria).getSingleResult();
+        session.close();
+        return minAge;
     }
 
     @Override
     public Double getAverageSalaryByDep(Long depId) {
-        return null;
+        CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+        Root<Employee> employee = criteria.from(Employee.class);
+        Join<Employee,Department> employeeJoin = employee.join("department", JoinType.INNER);
+        criteria.select(cb.avg(employee.get("salary"))).where(cb.equal(employeeJoin.get("department"), depId));
+        Session session = sessionFactory.openSession();
+        Double avg = session.createQuery(criteria).getSingleResult();
+        return avg;
     }
 
 
