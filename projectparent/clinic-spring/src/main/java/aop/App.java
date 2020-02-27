@@ -1,4 +1,4 @@
-package by.it.academy.project;
+package aop;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +16,7 @@ public class App {
             service.performExceptionJob();
         }catch (Exception e){
             log.error("Error", e);
-        }context.close();
-
-
+        }
+        context.close();
     }
 }
