@@ -12,9 +12,9 @@ public class App {
         TaskService service = (TaskService) context.getBean("taskService");
 
         service.performJob();
-        try{
+        try {
             service.performExceptionJob();
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("Error", e);
         }
         context.close();

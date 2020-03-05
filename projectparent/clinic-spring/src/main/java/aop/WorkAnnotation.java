@@ -11,10 +11,10 @@ public class WorkAnnotation {
 
     private static Logger log = LoggerFactory.getLogger(WorkAnnotation.class);
 
-    @Pointcut("execution(* by.it.academy.project.TaskService.performJob()")
+    @Pointcut("execution(* aop.TaskServiceAnnotation.performJob()")
     public void performance(){}
 
-    @Pointcut("execution(* by.it.academy.project.TaskService.performJob(String)) && args(name)")
+    @Pointcut("execution(* aop.TaskServiceAnnotation.performJob(String)) && args(name)")
     public void intercept(String name){}
 
     @Before("performance()")
