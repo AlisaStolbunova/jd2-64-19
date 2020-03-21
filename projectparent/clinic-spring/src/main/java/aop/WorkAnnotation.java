@@ -4,14 +4,16 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 
 @Aspect
+@Component
 public class WorkAnnotation {
 
     private static Logger log = LoggerFactory.getLogger(WorkAnnotation.class);
 
-    @Pointcut("execution(* aop.TaskServiceAnnotation.performJob()")
+    @Pointcut("execution(* aop.TaskServiceAnnotation.performJob())")
     public void performance(){}
 
     @Pointcut("execution(* aop.TaskServiceAnnotation.performJob(String)) && args(name)")

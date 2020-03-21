@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Slf4j
-public class Main {
+public class AopAnnotation {
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("annotation.xml");
