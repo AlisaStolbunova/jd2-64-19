@@ -32,7 +32,7 @@
         <appender-ref ref="FILE-ROLLING"/>
     </logger>
 
-    <logger name="by.it.academy" level="debug" additivity="false">
+    <logger name="by.it.academy" level="info" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
 

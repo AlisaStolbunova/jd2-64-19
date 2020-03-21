@@ -9,12 +9,9 @@
         <property name="hibernate.connection.password">Root12345</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
         <property name="hbm2ddl.auto">create</property>
-        <mapping class="by.it.academy.project.entity.Person"></mapping>
         <mapping class="by.it.academy.project.entity.Department"></mapping>
         <mapping class="by.it.academy.project.entity.Employee"></mapping>
-        <mapping class="by.it.academy.project.entity.EmployeeDetail"></mapping>
-        <mapping class="by.it.academy.project.entity.Meeting"></mapping>
     </session-factory>
 </hibernate-configuration>
