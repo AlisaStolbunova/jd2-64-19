@@ -14,5 +14,7 @@
      <a href="${pageContext.request.contextPath}/userInfo"><fmt:message key="menu.page.akkInfo"/></a>
      |
      <a href="${pageContext.request.contextPath}/login"><fmt:message key="menu.page.login"/></a>
+     |
+     <a href="${pageContext.request.contextPath}/registration"><fmt:message key="menu.page.reg"/></a>
 
  </div>

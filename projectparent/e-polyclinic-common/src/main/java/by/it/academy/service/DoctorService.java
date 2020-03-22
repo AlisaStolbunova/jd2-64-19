@@ -9,8 +9,7 @@ public interface DoctorService {
 
     List<Doctor> getAllDoctors();
 
-    void addNewDoctor(Doctor doctor);
-
+    Long create(String name, String post, Integer department, Integer section, Integer office, String phoneNumber);
 
     void deleteDoctor(Long id);
 

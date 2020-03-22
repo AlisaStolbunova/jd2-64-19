@@ -33,7 +33,8 @@ public class AuthFilter extends HttpFilter {
         if (user == null
                 && !req.getRequestURI().endsWith("/")
                 && !req.getRequestURI().endsWith("/home")
-                && !req.getRequestURI().endsWith("/login")) {
+                && !req.getRequestURI().endsWith("/login")
+                && !req.getRequestURI().endsWith("/registration")) {
             res.sendRedirect(req.getContextPath() + "/login");
 
         } else {
