@@ -13,18 +13,18 @@
           https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="aop"/>
+    <context:component-scan base-package="by.it.academy.clinic.aop"/>
 
     <aop:config>
         <aop:aspect ref = "work">
             <aop:before method="beforeWork"
-                        pointcut="execution(* aop.TaskService.performJob())"/>
+                        pointcut="execution(* by.it.academy.clinic.aop.TaskService.performJob())"/>
 
             <aop:after-returning method="afterWork"
-                                 pointcut="execution(* aop.TaskService.performJob())"/>
+                                 pointcut="execution(* by.it.academy.clinic.aop.TaskService.performJob())"/>
 
             <aop:after-throwing method="afterWorkProblems"
-                                pointcut="execution(* aop.TaskService.performExceptionJob())"/>
+                                pointcut="execution(* by.it.academy.clinic.aop.TaskService.performExceptionJob())"/>
 
         </aop:aspect>
     </aop:config>
