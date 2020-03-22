@@ -26,7 +26,7 @@ public class DoctorUpdateServlet extends HttpServlet {
         String office = req.getParameter("office");
         String phoneNumber = req.getParameter("phoneNumber");
 
-        Doctor doctor = new Doctor(Long.parseLong(id), name, post, department, Integer.parseInt(section),
+        Doctor doctor = new Doctor(name, post, Integer.valueOf(department), Integer.parseInt(section),
                 Integer.parseInt(office), phoneNumber);
 
         doctorService.updateDoctor(doctor);
