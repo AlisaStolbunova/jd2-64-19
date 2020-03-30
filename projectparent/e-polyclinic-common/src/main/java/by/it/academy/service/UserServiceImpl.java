@@ -2,34 +2,71 @@ package by.it.academy.service;
 
 
 import by.it.academy.clinic.User;
+import by.it.academy.dao.UserDao;
+import by.it.academy.dao.impl.UserDaoImpl;
+import by.it.academy.security.EncryptUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Map;
+import java.sql.SQLException;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     private static final UserService INSTANCE = new UserServiceImpl();
-    private final Map<String, User> users = new ConcurrentHashMap<>();
 
 
-    private UserServiceImpl() {
-        users.put("user1", new User("user1", "admin123", "admin"));
-        users.put("user2", new User("user2", "12345", "user"));
-    }
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     public static UserService getInstance() {
         return INSTANCE;
     }
 
+
     @Override
     public Optional<User> findUser(String login, String password) {
-        User user = users.get(login);
-        if (user != null && password.equals(user.getPassword())) {
-            return Optional.of(user);
-        } else {
-            return Optional.empty();
+        try {
+            Optional<User> userOption = userDao.getByUserName(login);
+            if (userOption.isPresent()) {
+                User user = userOption.get();
+                String hash = EncryptUtils.getSHA256(password, user.getSalt());
+                if (user.getPassword().equals(hash)) {
+                    return Optional.of(user);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Error find user by login and password " + login, e);
         }
+        return Optional.empty();
     }
+
+    @Override
+    public Optional<User> findUserById(Long id) {
+        try {
+            return userDao.read(id);
+        } catch (SQLException e) {
+            logger.error("Error find user by id: " + id, e);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Long createUser(String userName, String password){
+        Long count = 0L;
+        try {
+            String salt = EncryptUtils.generateSaltString();
+            User user = new User(userName, EncryptUtils.getSHA256(password, salt), salt, 2);
+            count = userDao.create(user);
+        } catch (SQLException e) {
+            logger.error("Error create user", e);
+        }
+
+        return count;
+    }
+
+
 }
 

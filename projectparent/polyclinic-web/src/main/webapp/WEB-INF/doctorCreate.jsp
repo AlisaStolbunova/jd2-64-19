@@ -20,9 +20,17 @@
      <br>
      <label> Post: <input type="text" name="post"/> </label>
      <br>
-     <label> Department: <input type="text" name="department"/> </label>
+     <label> Department: <select name='department'>
+                             <c:forEach items="${departments}" var="department">
+                                 <option value=${department.key}>${department.value}</option>
+                             </c:forEach>
+                         </select> </label>
       <br>
-      <label> Section: <input type="number" name="section"/> </label>
+      <label> Section: <select name='section'>
+                          <c:forEach items="${sections}" var="section">
+                              <option value=${section.key}>${section.value}</option>
+                          </c:forEach>
+                      </select> </label>
       <br>
       <label> Office: <input type="number" name="office"/> </label>
       <br>

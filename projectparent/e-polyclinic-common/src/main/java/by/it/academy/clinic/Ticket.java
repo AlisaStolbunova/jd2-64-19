@@ -4,14 +4,16 @@ import java.util.Objects;
 
 public class Ticket {
     private Long id;
-    private String specialist;
+    private Doctor specialist;
+    private Long data;
 
     public Ticket() {
     }
 
-    public Ticket(Long id, String specialist) {
+    public Ticket(Long id, Doctor specialist, Long data) {
         this.id = id;
         this.specialist = specialist;
+        this.data = data;
     }
 
     public Long getId() {
@@ -22,12 +24,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getSpecialist() {
+    public Doctor getSpecialist() {
         return specialist;
     }
 
-    public void setSpecialist(String specialist) {
+    public void setSpecialist(Doctor specialist) {
         this.specialist = specialist;
+    }
+
+    public Long getData() {
+        return data;
+    }
+
+    public void setData(Long data) {
+        this.data = data;
     }
 
     @Override
@@ -36,19 +46,21 @@ public class Ticket {
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
         return Objects.equals(id, ticket.id) &&
-                Objects.equals(specialist, ticket.specialist);
+                Objects.equals(specialist, ticket.specialist) &&
+                Objects.equals(data, ticket.data);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, specialist);
+        return Objects.hash(id, specialist, data);
     }
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", specialist='" + specialist + '\'' +
+                ", specialist=" + specialist +
+                ", data=" + data +
                 '}';
     }
 }

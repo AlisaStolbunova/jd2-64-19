@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="person" class="by.it.academy.clinic.bean.Person" init-method="init" destroy-method="destroy">
+        <property name="id" value="1"/>
+        <property name="name" value="Ivan"/>
+        <property name="surname" value="Ivanov"/>
+        <property name="personInfo" ref="personInfo"/>
+        <property name="department" ref="department"/>
+        <property name="meetings">
+            <list value-type="by.it.academy.clinic.entity.Meeting">
+                <ref bean="mondayMeeting"/>
+                <ref bean="tuesdayMeeting"/>
+                <ref bean="wednesdayMeeting"/>
+                <ref bean="fridayMeeting"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="personInfo" class="by.it.academy.clinic.bean.PersonInfo">
+        <property name="id" value="1"/>
+        <property name="city" value="Minsk"/>
+        <property name="street" value="Golodeda"/>
+        <property name="flat" value="45"/>
+    </bean>
+    <bean id="department" class="by.it.academy.clinic.entity.Department">
+        <property name="id" value="1"/>
+        <property name="name" value="Information technology"/>
+    </bean>
+    <bean id="mondayMeeting" class="by.it.academy.clinic.entity.Meeting">
+        <property name="id" value="1"/>
+        <property name="day" value="Monday"/>
+    </bean>
+    <bean id="tuesdayMeeting" class="by.it.academy.clinic.entity.Meeting">
+        <property name="id" value="2"/>
+        <property name="day" value="Tuesday"/>
+    </bean>
+    <bean id="wednesdayMeeting" class="by.it.academy.clinic.entity.Meeting">
+        <property name="id" value="3"/>
+        <property name="day" value="Wednesday"/>
+    </bean>
+    <bean id="fridayMeeting" class="by.it.academy.clinic.entity.Meeting">
+        <property name="id" value="4"/>
+        <property name="day" value="Friday"/>
+    </bean>
+</beans>
